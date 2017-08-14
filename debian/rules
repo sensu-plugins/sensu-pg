@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+SHELL := /bin/bash
+PG_VERSION = 9.4.1
+SRC_DIR = ${CURDIR}/postgresql-$(PG_VERSION)
+
+CONF = --exec-prefix=/opt/sensu/embedded/ \
+  --prefix=/opt/sensu/embedded/ \
+  --with-openssl \
+  --without-readline \
+  --with-includes=/opt/sensu/embedded/include/ \
+  --with-libraries=/opt/sensu/embedded/lib/ \
+  --sysconfdir=/etc 
+
+download_unpack: 
+	wget https://ftp.postgresql.org/pub/source/v$(PG_VERSION)/postgresql-$(PG_VERSION).tar.gz -O ./postgresql-$(PG_VERSION).tar.gz
+	tar -xf postgresql-$(PG_VERSION).tar.gz
+
+clean: 
+	dh_testdir
+	dh_testroot
+	rm -R $(SRC_DIR) postgresql-$(PG_VERSION).tar.gz
+
+build-arch: download_unpack
+	sed 's|#define DEFAULT_PGSOCKET_DIR  "/tmp"|#define DEFAULT_PGSOCKET_DIR  "/var/run/postgresql/"|g' -i $(SRC_DIR)/src/include/pg_config_manual.h 
+	cd $(SRC_DIR) && ./configure $(CONF)
+	$(MAKE) -C $(SRC_DIR)/src/interfaces/libpq/
+	$(MAKE) -C $(SRC_DIR)/src/interfaces/libpq/ install DESTDIR=${CURDIR}/debian/sensu-pg
+	$(MAKE) -C $(SRC_DIR)/src/bin/pg_config/ 
+	$(MAKE) -C $(SRC_DIR)/src/bin/pg_config/ install DESTDIR=${CURDIR}/debian/sensu-pg
+	cp $(SRC_DIR)/src/backend/utils/fmgroids.h $(SRC_DIR)/src/include/utils/
+	$(MAKE) -C $(SRC_DIR)/src/include/ install DESTDIR=${CURDIR}/debian/sensu-pg
+ 
+install: 
+	dh_testdir
+	dh_testroot
+
+build: clean build-arch install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_strip
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+.PHONY: configure build-lib build-pgconf build-inc build-arch install binary	

@@ -1,0 +1,17 @@
+sensu-pg (1.0.2-3) precise; urgency=low
+
+  * Change dependencies
+
+ -- Daniel Golka <daniel.golka@socialbakers.com>  Mon, 14 Aug 2017 16:18:01 +0200
+
+sensu-pg (1.0.2-2) precise; urgency=low
+
+  * Change socket dir
+
+ -- Daniel Golka <daniel.golka@socialbakers.com>  Mon, 14 Aug 2017 15:31:44 +0200
+
+sensu-pg (1.0.2-1) stable; urgency=low
+
+  * Initial release. (Closes: #000000)
+
+ -- Daniel Golka <daniel.golka@socialbakers.com>  Fri, 11 Aug 2017 15:25:50 +0200

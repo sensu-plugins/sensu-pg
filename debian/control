@@ -1,0 +1,14 @@
+Source: sensu-pg
+Section: admin
+Priority: optional
+Maintainer: Daniel Golka <daniel.golka@socialbakers.com>
+Build-Depends: debhelper (>= 5), sensu
+Standards-Version: 3.9.1
+Homepage: https://www.postgresql.org/
+
+Package: sensu-pg
+Architecture: amd64
+Depends: sensu ( >= 1.0.2 )
+Description: pg libraries for sensu
+ This package contains postgre library and headers for sensu
+ .
