@@ -1,6 +1,6 @@
 # Sensu pg
 
-Sensu pg is package with compiled libpg against sensu openssl. It makes pg gem installation possible in sensu embedded environment. RPM package will be soon. 
+Sensu pg is package with compiled libpg against sensu openssl. It makes pg gem installation possible in sensu embedded environment. RPM package will be soon.  
 
 ___
 
@@ -22,7 +22,7 @@ cd sensu-pg
 ```
 dpkg-buildpackage -b
 ```
-5. Instal package with dpkg
+5. Install package with dpkg
 
 ## Install binary package
 1. Go to release page
