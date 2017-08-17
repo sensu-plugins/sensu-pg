@@ -8,7 +8,7 @@ ___
 
 1. Clone this repo
 ```
-git clone https://github.com/mrtrotl/sensu-pg.git
+git clone https://github.com/sensu-plugins/sensu-pg.git
 ```
 2. Install sensu and build-essential pkgs
 ```
