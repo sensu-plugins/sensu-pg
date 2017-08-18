@@ -24,7 +24,7 @@ dpkg-buildpackage -b
 ```
 5. Install package with dpkg
 ```
-dpkg -i ../sensu-pg_1.0.2-3_amd64.deb
+sudo pkg -i ../sensu-pg_1.0.2-3_amd64.deb
 
 ## Install binary package
 1. Go to release page
