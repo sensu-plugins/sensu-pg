@@ -12,7 +12,7 @@ git clone https://github.com/sensu-plugins/sensu-pg.git
 ```
 2. Install sensu and build-essential pkgs
 ```
-sudo apt-get install sensu build-essential
+sudo apt-get install sensu build-essential debhelper
 ```
 3. Enter in git repo directory
 ```
@@ -23,6 +23,8 @@ cd sensu-pg
 dpkg-buildpackage -b
 ```
 5. Install package with dpkg
+```
+dpkg -i ../sensu-pg_1.0.2-3_amd64.deb
 
 ## Install binary package
 1. Go to release page
