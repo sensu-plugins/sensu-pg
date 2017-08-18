@@ -19,8 +19,7 @@ download_unpack:
 clean: 
 	dh_testdir
 	dh_testroot
-	rm -R $(SRC_DIR) postgresql-$(PG_VERSION).tar.gz
-
+	
 build-arch: download_unpack
 	sed 's|#define DEFAULT_PGSOCKET_DIR  "/tmp"|#define DEFAULT_PGSOCKET_DIR  "/var/run/postgresql/"|g' -i $(SRC_DIR)/src/include/pg_config_manual.h 
 	cd $(SRC_DIR) && ./configure $(CONF)
@@ -30,7 +29,8 @@ build-arch: download_unpack
 	$(MAKE) -C $(SRC_DIR)/src/bin/pg_config/ install DESTDIR=${CURDIR}/debian/sensu-pg
 	cp $(SRC_DIR)/src/backend/utils/fmgroids.h $(SRC_DIR)/src/include/utils/
 	$(MAKE) -C $(SRC_DIR)/src/include/ install DESTDIR=${CURDIR}/debian/sensu-pg
- 
+	rm -R $(SRC_DIR) postgresql-$(PG_VERSION).tar.gz
+
 install: 
 	dh_testdir
 	dh_testroot
